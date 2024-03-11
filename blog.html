@@ -18,6 +18,26 @@
     <link rel="stylesheet" href="assets/plugins/slider/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="assets/plugins/slider/css/owl.theme.default.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <style>
+        .skeleton-bg {
+            background: #ddd;
+            background-image: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+            background-size: 800px 104px;
+            height: 20px;
+            border-radius: 4px;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -800px 0;
+            }
+            100% {
+                background-position: 800px 0;
+            }
+        }
+
+    </style>
 </head>
 
 <body>
@@ -190,42 +210,66 @@
         
         // Fetch all blog posts and render them
         $(document).ready(function () {
+            const blogRow = $("#blogRow");
+
+            // Add loading state
+            const loadingHtml = `
+                <div class="col-md-4 col-sm-6">
+                    <div class="single-blog loading">
+                        <div class="card">
+                            <div class="skeleton-bg" style="height:200px;"></div>
+                            <div class="card-body">
+                                <h5 class="skeleton-bg" style="height:20px;"></h5>
+                                <p class="skeleton-bg" style="height:15px;"></p>
+                                <p class="skeleton-bg" style="height:15px;"></p>
+                                <p class="skeleton-bg" style="height:15px;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            for (let i = 0; i < 3; i++) {
+                blogRow.append(loadingHtml);
+            }
+
             db.collection("blogPosts")
                 .get()
                 .then((querySnapshot) => {
-                    const blogRow = $("#blogRow");
-                    querySnapshot.forEach((doc) => {
-                        const post = doc.data();
-                        // Convert Firestore Timestamp to JavaScript Date object
-                        const date = post.date.toDate();
-                        // Format date as MM/DD/YYYY
-                        const formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-                        // Get the first 100 characters of the content
-                        const shortContent = post.content.substring(0, 80) + '...';
-                        const blogHtml = `
-                            <div class="col-md-4 col-sm-6">
-                                <div class="single-blog">
-                                    <figure>
-                                        <img src="${post?.image}" alt="">
-                                    </figure>
-                                    <div class="blog-detail">
-                                        <small>By ${post.author} | ${formattedDate}</small>
-                                        <h4>${post?.title}</h4>
-                                        <p>${shortContent}</p>
-                                        <div class="link">
-                                            <a href="full_blog.html?blogId=${doc.id}">Read more</a><i class="fas fa-long-arrow-alt-right"></i>
+                    // Remove loading state
+                    blogRow.empty();
+
+                    if (querySnapshot.empty) {
+                        // No blog posts found
+                        blogRow.append('<p>No blog posts available</p>');
+                    } else {
+                        querySnapshot.forEach((doc) => {
+                            const post = doc.data();
+                            const date = post.date.toDate();
+                            const formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+                            const shortContent = post.content.substring(0, 80) + '...';
+                            const blogHtml = `
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="single-blog">
+                                        <figure>
+                                            <img src="${post?.image}" alt="">
+                                        </figure>
+                                        <div class="blog-detail">
+                                            <small>By ${post.author} | ${formattedDate}</small>
+                                            <h4>${post?.title}</h4>
+                                            <p>${shortContent}</p>
+                                            <div class="link">
+                                                <a href="full_blog.html?blogId=${doc.id}">Read more</a><i class="fas fa-long-arrow-alt-right"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>`;
-                        blogRow.append(blogHtml);
-                    });
+                                </div>`;
+                            blogRow.append(blogHtml);
+                        });
+                    }
                 })
                 .catch((error) => {
                     console.error("Error fetching blog posts:", error);
                 });
         });
-
     </script>
 </body>
 
