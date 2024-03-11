@@ -1,0 +1,11 @@
+Backend Work
+
+- Handle Form Submission
+- Save images and load images
+- Save blogs
+- Save beneficiaries
+- Save advisory board
+- Upload running needs
+- Handle donations
+- API for google map
+- 
