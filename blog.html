@@ -1,291 +1,232 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Mustard Seed Ministries</title>
-    <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon">
-   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="assets/images/fav.jpg">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/plugins/slider/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/plugins/slider/css/owl.theme.default.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="assets/images/fav.jpg" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <link rel="stylesheet" href="assets/plugins/slider/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="assets/plugins/slider/css/owl.theme.default.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 </head>
 
 <body>
-
-<header class="continer-fluid ">
-    <div  class="header-top">
-        <div class="container">
-            <div class="row col-det">
-                <div class="col-lg-6 d-none d-lg-block">
-                    <ul class="ulleft">
-                        <li>
-                            <i class="far fa-envelope"></i>
-                            mustardseedministries5@gmail.com
-                            <span>|</span></li>
-                        <li>
-                            <i class="fas fa-phone-volume"></i>
-                            +263 77 211 1382</li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6 folouws">
-                    
-                    <ul class="ulright">
-                        <li> <small>Folow Us </small>:</li>
-                        <li>
-                            <i class="fab fa-facebook-square"></i>
-                        </li>
-                        <li>
-                            <i class="fab fa-twitter-square"></i>
-                        </li>
-                        <li>
-                            <i class="fab fa-instagram"></i>
-                        </li>
-                        <li>
-                            <i class="fab fa-linkedin"></i>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed">
-                    <button class="btn btn-sm btn-success">Join Us</button>
-                    <button class="btn btn-sm btn-default">Donate</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="menu-jk" class="header-bottom">
-        <div class="container">
-            <div class="row nav-row">
-                <div class="col-lg-3 col-md-12 logo">
-                    <a href="index.html">
-                        <img src="assets/images/logo-small.jpg" alt=""><span id="logo-text">MUSTARD SEED MINISTRIES</span>
-                        <a data-toggle="collapse" data-target="#menu" href="#menu"><i class="fas d-block d-lg-none  small-menu fa-bars"></i></a>
-                    </a>
-
-                </div>
-                <div id="menu" class="col-lg-9 col-md-12 d-none d-lg-block nav-col">
-
-                            <ul class="navbad">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Home
-                                    </a>
-                                </li>
-                                
-                                <li class="nav-item">
-                                    <a class="nav-link" href="services.html">Ministries</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="gallery.html">Gallery</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="blog.html">Blog</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="about_us.html">About us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact_us.html">Contact us</a>
-                                </li>
-
-
-
-
-                            </ul>
-
-
+    <header class="continer-fluid">
+        <div class="header-top">
+            <div class="container">
+                <div class="row col-det">
+                    <div class="col-lg-6 d-none d-lg-block">
+                        <ul class="ulleft">
+                            <li>
+                                <i class="far fa-envelope"></i>
+                                mustardseedministries5@gmail.com
+                                <span>|</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-volume"></i>
+                                +263 77 211 1382
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 folouws">
+                        <ul class="ulright">
+                            <li><small>Folow Us </small>:</li>
+                            <li>
+                                <i class="fab fa-facebook-square"></i>
+                            </li>
+                            <li>
+                                <i class="fab fa-twitter-square"></i>
+                            </li>
+                            <li>
+                                <i class="fab fa-instagram"></i>
+                            </li>
+                            <li>
+                                <i class="fab fa-linkedin"></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed">
+                        <button class="btn btn-sm btn-success">Join Us</button>
+                        <button class="btn btn-sm btn-default">Donate</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div> 
-</header>
- 
-  <!--  ************************* Page Title Starts Here ************************** -->
-        
+        <div id="menu-jk" class="header-bottom">
+            <div class="container">
+                <div class="row nav-row">
+                    <div class="col-lg-3 col-md-12 logo">
+                        <a href="index.html">
+                            <img src="assets/images/logo-small.jpg" alt="" /><span id="logo-text">MUSTARD SEED
+                                MINISTRIES</span>
+                            <a data-toggle="collapse" data-target="#menu" href="#menu"><i
+                                    class="fas d-block d-lg-none small-menu fa-bars"></i></a>
+                        </a>
+                    </div>
+                    <div id="menu" class="col-lg-9 col-md-12 d-none d-lg-block nav-col">
+                        <ul class="navbad">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Home </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="services.html">Ministries</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="gallery.html">Gallery</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="blog.html">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about_us.html">About us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact_us.html">Contact us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--  ************************* Page Title Starts Here ************************** -->
+
     <div class="page-nav no-margin row">
         <div class="container">
             <div class="row">
                 <h2>Our Blog</h2>
                 <ul>
-                    <li> <a href="#"><i class="fas fa-home"></i> Home</a></li>
+                    <li>
+                        <a href="#"><i class="fas fa-home"></i> Home</a>
+                    </li>
                     <li><i class="fas fa-angle-double-right"></i> Blog</li>
                 </ul>
             </div>
         </div>
     </div>
-    
-    
-   
-<!-- ################# Our Blog Starts Here#######################--->
+
+    <!-- ################# Our Blog Starts Here#######################--->
 
     <section class="our-blog">
-         	<div class="container">
-         		
-        		<div class="blog-row row">
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="assets/images/events/image_01.jpg" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Ms Muteve | Founder | August 10 2018</small>
-								<h4>Loreum Ipsum</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="assets/images/events/image_02.jpg" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Ms Muteve | Founder | August 10 2018</small>
-								<h4>Loreum Ipsum</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="assets/images/events/image_03.jpg" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Ms Muteve | Founder | August 10 2018</small>
-								<h4>Loreum Ipsum</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="assets/images/events/image_04.jpg" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Ms Muteve | Founder | August 10 2018</small>
-								<h4>Loreum Ipsum</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="assets/images/events/image_05.jpg" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Ms Muteve | Founder | August 10 2018</small>
-								<h4>Loreum Ipsum</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-                    <div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="assets/images/events/image_06.jpg" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Ms Muteve | Founder | August 10 2018</small>
-								<h4>Loreum Ipsum</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-        		</div>
-         	</div>
-         </section>
-      
-      
-       
-  
-                 
+        <div class="container">
+            <div class="blog-row row" id="blogRow">
+                <!-- Blog posts will be dynamically added here -->
+            </div>
+        </div>
+    </section>
 
-    <!-- ################# Footer Starts Here#######################---> 
-        
+    <!-- ################# Footer Starts Here#######################--->
+
     <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-sm-12">
                     <h2>About Us</h2>
                     <p>
-                        Mustard Seed Ministries is a Not-for-Profit Organisation registered in Zimbabwe under the Private Voluntary Act that regulates the operations of all Charitable Organisation, (Private Voluntary Organisation, PVO Number: 31/2010).
+                        Mustard Seed Ministries is a Not-for-Profit Organisation
+                        registered in Zimbabwe under the Private Voluntary Act that
+                        regulates the operations of all Charitable Organisation, (Private
+                        Voluntary Organisation, PVO Number: 31/2010).
                     </p>
-                    
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <h2>Useful Links</h2>
                     <ul class="list-unstyled link-list">
-                        <li><a ui-sref="portfolio" href="#/portfolio">Ministries</a><i class="fa fa-angle-right"></i></li>
-                        <li><a ui-sref="gallery" href="#/gallery">Gallery</a><i class="fa fa-angle-right"></i></li>
-                        <li><a ui-sref="contact" href="#/contact">Contact us</a><i class="fa fa-angle-right"></i></li>
+                        <li>
+                            <a ui-sref="portfolio" href="#/portfolio">Ministries</a><i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a ui-sref="gallery" href="#/gallery">Gallery</a><i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a ui-sref="contact" href="#/contact">Contact us</a><i class="fa fa-angle-right"></i>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-4 col-sm-12 map-img">
                     <h2>Contact Us</h2>
                     <address class="md-margin-bottom-40">
-                        <p>Mustard Seed <br>
-                        2348 Rooiport St, <br>
-                        Chivhu, Zimbabwe <br>
-                        Phone: +263 77 211 1382 <br>
-                        Email: <a href="mailto:mustardseedministries5@gmail.com" class="">mustardseedministries5@gmail.com</a><br>
-                    </p></address>
-                    <div class="donate-link col-md-3"><a href="#" class="btn btn-primary "><span class="btn-title">Donate Now</span></a></div>
-    
+                        <p>
+                            Mustard Seed <br />
+                            2348 Rooiport St, <br />
+                            Chivhu, Zimbabwe <br />
+                            Phone: +263 77 211 1382 <br />
+                            Email:
+                            <a href="mailto:mustardseedministries5@gmail.com"
+                                class="">mustardseedministries5@gmail.com</a><br />
+                        </p>
+                    </address>
+                    <div class="donate-link col-md-3">
+                        <a href="#" class="btn btn-primary"><span class="btn-title">Donate Now</span></a>
+                    </div>
                 </div>
             </div>
-            
         </div>
-        
-
     </footer>
-          
-    
-</body>
 
-<script src="assets/js/jquery-3.2.1.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
-<script src="assets/plugins/slider/js/owl.carousel.min.js"></script>
-<script src="assets/js/script.js"></script>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+    <script src="assets/plugins/slider/js/owl.carousel.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/db.js"></script>
+    
+    <script>
+        
+        // Fetch all blog posts and render them
+        $(document).ready(function () {
+            db.collection("blogPosts")
+                .get()
+                .then((querySnapshot) => {
+                    const blogRow = $("#blogRow");
+                    querySnapshot.forEach((doc) => {
+                        const post = doc.data();
+                        // Convert Firestore Timestamp to JavaScript Date object
+                        const date = post.date.toDate();
+                        // Format date as MM/DD/YYYY
+                        const formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+                        // Get the first 100 characters of the content
+                        const shortContent = post.content.substring(0, 80) + '...';
+                        const blogHtml = `
+                            <div class="col-md-4 col-sm-6">
+                                <div class="single-blog">
+                                    <figure>
+                                        <img src="${post?.image}" alt="">
+                                    </figure>
+                                    <div class="blog-detail">
+                                        <small>By ${post.author} | ${formattedDate}</small>
+                                        <h4>${post?.title}</h4>
+                                        <p>${shortContent}</p>
+                                        <div class="link">
+                                            <a href="full_blog.html?blogId=${doc.id}">Read more</a><i class="fas fa-long-arrow-alt-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                        blogRow.append(blogHtml);
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error fetching blog posts:", error);
+                });
+        });
+
+    </script>
+</body>
 
 </html>
