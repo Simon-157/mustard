@@ -7,7 +7,7 @@
     <title>Mustard Seed Ministries</title>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.1/lib/marked.umd.min.js"></script>
     <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet" />
 
@@ -19,9 +19,18 @@
     <link rel="stylesheet" href="assets/plugins/slider/css/owl.theme.default.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <style>
+        .create-icon {
+            color: #5cb85c !important;
+            font-size: 15px;
+        }
+
+
         .skeleton-bg {
             background: #ddd;
-            background-image: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+            background-image: linear-gradient(to right,
+                    #eee 8%,
+                    #ddd 18%,
+                    #eee 33%);
             background-size: 800px 104px;
             height: 20px;
             border-radius: 4px;
@@ -32,11 +41,11 @@
             0% {
                 background-position: -800px 0;
             }
+
             100% {
                 background-position: 800px 0;
             }
         }
-
     </style>
 </head>
 
@@ -87,8 +96,8 @@
                 <div class="row nav-row">
                     <div class="col-lg-3 col-md-12 logo">
                         <a href="index.html">
-                            <img src="assets/images/logo-small.jpg" alt="" /><span id="logo-text">MUSTARD SEED
-                                MINISTRIES</span>
+                            <img src="assets/images/logo-small.jpg" alt="" class="img-fluid" /><span
+                                id="logo-text">MUSTARD SEED MINISTRIES</span>
                             <a data-toggle="collapse" data-target="#menu" href="#menu"><i
                                     class="fas d-block d-lg-none small-menu fa-bars"></i></a>
                         </a>
@@ -125,8 +134,10 @@
 
     <!--  ************************* Page Title Starts Here ************************** -->
 
+
     <div class="page-nav no-margin row">
         <div class="container">
+
             <div class="row">
                 <h2>Our Blog</h2>
                 <ul>
@@ -134,11 +145,15 @@
                         <a href="#"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li><i class="fas fa-angle-double-right"></i> Blog</li>
+                    <li><i class="fas fa-angle-double-right"></i></li>
+
+                    <li>
+                        <a href="createblog.html" style="color: #5cb85c;"><i class="fas fa-plus create-icon"></i> Create</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
-
     <!-- ################# Our Blog Starts Here#######################--->
 
     <section class="our-blog">
@@ -205,9 +220,9 @@
     <script src="assets/plugins/slider/js/owl.carousel.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/db.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     <script>
-        
         // Fetch all blog posts and render them
         $(document).ready(function () {
             const blogRow = $("#blogRow");
@@ -239,13 +254,20 @@
 
                     if (querySnapshot.empty) {
                         // No blog posts found
-                        blogRow.append('<p>No blog posts available</p>');
+                        blogRow.append("<p>No blog posts available</p>");
                     } else {
                         querySnapshot.forEach((doc) => {
                             const post = doc.data();
                             const date = post.date.toDate();
-                            const formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-                            const shortContent = post.content.substring(0, 80) + '...';
+                            const formattedDate =
+                                date.getMonth() +
+                                1 +
+                                "/" +
+                                date.getDate() +
+                                "/" +
+                                date.getFullYear();
+                            const shortContent = post.content.substring(50, 80) + "...";
+                            const renderedContent = marked.parse(shortContent); // Render Markdown content
                             const blogHtml = `
                                 <div class="col-md-4 col-sm-6">
                                     <div class="single-blog">
@@ -255,7 +277,7 @@
                                         <div class="blog-detail">
                                             <small>By ${post.author} | ${formattedDate}</small>
                                             <h4>${post?.title}</h4>
-                                            <p>${shortContent}</p>
+                                            <div class="content">${renderedContent}</div>
                                             <div class="link">
                                                 <a href="full_blog.html?blogId=${doc.id}">Read more</a><i class="fas fa-long-arrow-alt-right"></i>
                                             </div>

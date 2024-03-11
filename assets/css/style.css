@@ -250,12 +250,19 @@ header {
   width: 100%;
   z-index: 99; }
   header .logo {
-    padding-top: 6px; }
+    padding-top: 6px;
+    display: flex;
+    align-items: center; 
+  
+  }
   header .logo #logo-text {
-    padding: 6px;
+    padding: 3px;
     font-size: small;
     font-weight: bolder;
-    color: green;}
+    color: green;
+
+  
+  }
   header .header-top {
     background-color: #fff;
     border-bottom: 1px solid #d3d7cea6;
@@ -370,12 +377,12 @@ header {
 
 @media screen and (max-width: 1050px) {
   .slider-captions {
-    bottom: 100px !important; }
+    bottom: 100px !important; 
 
   width: 90%;
   text-align: center;
   float: none;
-  margin: auto;
+  margin: auto;}
   .slider-captions .slider-title {
     font-size: 42px; } }
 @media screen and (max-width: 810px) {

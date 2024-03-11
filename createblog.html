@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Include necessary libraries and stylesheets -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Create Blog Post - Mustard Seed Ministries</title>
+    <!-- Include Firebase scripts and other stylesheets -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="shortcut icon" href="assets/images/fav.jpg" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <link rel="stylesheet" href="assets/plugins/slider/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="assets/plugins/slider/css/owl.theme.default.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" />
+    <style>
+        .blog-creation{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-creation input{
+            width: 50%;
+        }
+        .blog-creation input, .blog-creation textarea, .blog-creation label {
+            border: 0;
+            padding: 5px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+
+     <header class="continer-fluid">
+        <div class="header-top">
+            <div class="container">
+                <div class="row col-det">
+                    <div class="col-lg-6 d-none d-lg-block">
+                        <ul class="ulleft">
+                            <li>
+                                <i class="far fa-envelope"></i>
+                                mustardseedministries5@gmail.com
+                                <span>|</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-volume"></i>
+                                +263 77 211 1382
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 folouws">
+                        <ul class="ulright">
+                            <li><small>Folow Us </small>:</li>
+                            <li>
+                                <i class="fab fa-facebook-square"></i>
+                            </li>
+                            <li>
+                                <i class="fab fa-twitter-square"></i>
+                            </li>
+                            <li>
+                                <i class="fab fa-instagram"></i>
+                            </li>
+                            <li>
+                                <i class="fab fa-linkedin"></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed">
+                        <button class="btn btn-sm btn-success">Join Us</button>
+                        <button class="btn btn-sm btn-default">Donate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="menu-jk" class="header-bottom">
+            <div class="container">
+                <div class="row nav-row">
+                    <div class="col-lg-3 col-md-12 logo">
+                        <a href="index.html">
+                            <img src="assets/images/logo-small.jpg" alt=""  class="img-fluid"/><span id="logo-text">MUSTARD SEED
+                                MINISTRIES</span>
+                            <a data-toggle="collapse" data-target="#menu" href="#menu"><i
+                                    class="fas d-block d-lg-none small-menu fa-bars"></i></a>
+                        </a>
+                    </div>
+                    <div id="menu" class="col-lg-9 col-md-12 d-none d-lg-block nav-col">
+                        <ul class="navbad">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Home </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="services.html">Ministries</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="gallery.html">Gallery</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="blog.html">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about_us.html">About us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact_us.html">Contact us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Page Title Section -->
+    <div class="page-nav no-margin row">
+        <div class="container">
+            <div class="row">
+                <h2>Create Blog Post</h2>
+                <ul>
+                    <li>
+                        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li><i class="fas fa-angle-double-right"></i> Create Blog Post</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Content Creation Section -->
+    <section class="blog-creation m-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="blog-creation-form">
+                        <label for="blogTitle">Blog Title/ topic: </label>
+                        <input type="text" id="blogTitle" placeholder="Enter your blog title" />
+                        <br />
+                        <label for="blogAuthor">Blog Author/full:</label>
+                        <input type="text" id="blogAuthor" placeholder="Enter your name" />
+
+                        <div class="form-group">
+                            <label for="blogContent">Blog Content:</label>
+                            <textarea id="blogContent"></textarea>
+
+                        </div>
+
+                        <button id="submitBlogBtn" class="btn btn-primary mb-4">Save Blog Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ################# Footer Starts Here#######################--->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <h2>About Us</h2>
+                    <p>
+                        Mustard Seed Ministries is a Not-for-Profit Organisation
+                        registered in Zimbabwe under the Private Voluntary Act that
+                        regulates the operations of all Charitable Organisation, (Private
+                        Voluntary Organisation, PVO Number: 31/2010).
+                    </p>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <h2>Useful Links</h2>
+                    <ul class="list-unstyled link-list">
+                        <li>
+                            <a ui-sref="portfolio" href="#/portfolio">Ministries</a><i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a ui-sref="gallery" href="#/gallery">Gallery</a><i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a ui-sref="contact" href="#/contact">Contact us</a><i class="fa fa-angle-right"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-sm-12 map-img">
+                    <h2>Contact Us</h2>
+                    <address class="md-margin-bottom-40">
+                        <p>
+                            Mustard Seed <br />
+                            2348 Rooiport St, <br />
+                            Chivhu, Zimbabwe <br />
+                            Phone: +263 77 211 1382 <br />
+                            Email:
+                            <a href="mailto:mustardseedministries5@gmail.com"
+                                class="">mustardseedministries5@gmail.com</a><br />
+                        </p>
+                    </address>
+                    <div class="donate-link col-md-3">
+                        <a href="#" class="btn btn-primary"><span class="btn-title">Donate Now</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+    <script src="assets/plugins/slider/js/owl.carousel.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/db.js"></script>
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script>
+        // Initialize SimpleMDE
+        const simplemde = new SimpleMDE({
+            element: document.getElementById("blogContent"),
+            forceSync: true,
+        });
+
+        // Event listener for the submit button
+        document.getElementById("submitBlogBtn").addEventListener("click", function () {
+            // Get values from the input fields
+            const title = document.getElementById("blogTitle").value;
+            const author = document.getElementById("blogAuthor").value;
+            const imageUrl = "https://mustard-nu.vercel.app/assets/images/events/image_08.jpg"
+            const content = simplemde.value();
+
+            // Check if title, author, and content are not empty and content is more than 90 characters
+            if (title && author && content && content.length > 90) {
+                
+                db.collection("blogPosts").add({
+                    title: title,
+                    author: author,
+                    content: content,
+                    date: firebase.firestore.Timestamp.fromDate(new Date()),
+                    image: imageUrl
+                })
+                .then((docRef) => {
+                    console.log("Document written with ID: ", docRef.id);
+                    alert("Blog post created successfully!");
+                })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                    alert("Failed to create blog post.");
+                });
+            } else {
+                alert("Please fill in all fields and ensure the blog content is more than 90 characters");
+            }
+        });
+    </script>
+</body>
+
+</html>
