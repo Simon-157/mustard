@@ -20,15 +20,23 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" />
     <style>
-        .blog-creation{
+        .welcome-user {
+            color: #6fc53d;
+            font-size: 20px;
+        }
+
+        .blog-creation {
             display: flex;
             flex-direction: column;
         }
 
-        .blog-creation input{
+        .blog-creation input {
             width: 50%;
         }
-        .blog-creation input, .blog-creation textarea, .blog-creation label {
+
+        .blog-creation input,
+        .blog-creation textarea,
+        .blog-creation label {
             border: 0;
             padding: 5px;
             font-size: 18px;
@@ -39,7 +47,7 @@
 <body>
     <!-- Header Section -->
 
-     <header class="continer-fluid">
+    <header class="continer-fluid">
         <div class="header-top">
             <div class="container">
                 <div class="row col-det">
@@ -85,7 +93,8 @@
                 <div class="row nav-row">
                     <div class="col-lg-3 col-md-12 logo">
                         <a href="index.html">
-                            <img src="assets/images/logo-small.jpg" alt=""  class="img-fluid"/><span id="logo-text">MUSTARD SEED
+                            <img src="assets/images/logo-small.jpg" alt="" class="img-fluid" /><span
+                                id="logo-text">MUSTARD SEED
                                 MINISTRIES</span>
                             <a data-toggle="collapse" data-target="#menu" href="#menu"><i
                                     class="fas d-block d-lg-none small-menu fa-bars"></i></a>
@@ -114,6 +123,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="contact_us.html">Contact us</a>
                             </li>
+                            <li>
+                                <button class="btn btn-primary my-2 my-sm-0 logout" type="submit">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -124,7 +138,10 @@
 
     <!-- Page Title Section -->
     <div class="page-nav no-margin row">
+
         <div class="container">
+            <div class="welcome-user"></div>
+            <!-- welcome user -->
             <div class="row">
                 <h2>Create Blog Post</h2>
                 <ul>
@@ -211,6 +228,7 @@
             </div>
         </div>
     </footer>
+    <script src="assets/js/script.js"></script>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -219,41 +237,50 @@
     <script src="assets/js/script.js"></script>
     <script src="assets/js/db.js"></script>
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+
     <script>
+        const authorName = document.getElementById("blogAuthor");
+        const titleField = document.getElementById("blogTitle");
+        const contentField = document.getElementById("blogContent");
+        const submitBtn = document.getElementById("submitBlogBtn");
+
         // Initialize SimpleMDE
         const simplemde = new SimpleMDE({
-            element: document.getElementById("blogContent"),
+            element: contentField,
             forceSync: true,
         });
 
-        // Event listener for the submit button
-        document.getElementById("submitBlogBtn").addEventListener("click", function () {
-            // Get values from the input fields
-            const title = document.getElementById("blogTitle").value;
-            const author = document.getElementById("blogAuthor").value;
-            const imageUrl = "https://mustard-nu.vercel.app/assets/images/events/image_08.jpg"
-            const content = simplemde.value();
+        // Check authentication state change
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                authorName.value = user.email.split("@")[0];
+            } else {
+                window.location.href = "auth.html";
+            }
+        });
 
-            // Check if title, author, and content are not empty and content is more than 90 characters
-            if (title && author && content && content.length > 90) {
-                
+        // Event listener for the submit button
+        submitBtn.addEventListener("click", function () {
+            const blogTitle = titleField.value;
+            const blogAuthor = authorName.value;
+            const blogContent = simplemde.value();
+            const imageUrl = "https://mustard-nu.vercel.app/assets/images/events/image_08.jpg";
+
+            if (blogTitle && blogAuthor && blogContent.length > 90) {
                 db.collection("blogPosts").add({
-                    title: title,
-                    author: author,
-                    content: content,
+                    title: blogTitle,
+                    author: blogAuthor,
+                    content: blogContent,
                     date: firebase.firestore.Timestamp.fromDate(new Date()),
                     image: imageUrl
-                })
-                .then((docRef) => {
-                    console.log("Document written with ID: ", docRef.id);
+                }).then(function () {
                     alert("Blog post created successfully!");
-                })
-                .catch((error) => {
-                    console.error("Error adding document: ", error);
+                }).catch(function () {
                     alert("Failed to create blog post.");
                 });
             } else {
-                alert("Please fill in all fields and ensure the blog content is more than 90 characters");
+                alert("Please fill in all fields and ensure the blog content is more than 90 characters.");
             }
         });
     </script>

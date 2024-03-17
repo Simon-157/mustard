@@ -7,6 +7,8 @@
     <title>Mustard Seed Ministries</title>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/marked@12.0.1/lib/marked.umd.min.js"></script>
     <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet" />
@@ -37,6 +39,18 @@
             animation: shimmer 1.5s infinite;
         }
 
+        .fa-edit{
+            color: #5cb85c;
+        }
+
+        .fa-trash{
+            color: rgba(235, 100, 47, 0.445);
+        }
+        .blog-footer {
+            padding: 2px;
+            display:flex ;
+            justify-content: space-between;
+        }
         @keyframes shimmer {
             0% {
                 background-position: -800px 0;
@@ -148,7 +162,8 @@
                     <li><i class="fas fa-angle-double-right"></i></li>
 
                     <li>
-                        <a href="createblog.html" style="color: #5cb85c;"><i class="fas fa-plus create-icon"></i> Create</a>
+                        <a href="createblog.html" style="color: #5cb85c;"><i class="fas fa-plus create-icon"></i>
+                            Create</a>
                     </li>
                 </ul>
             </div>
@@ -256,6 +271,7 @@
                         // No blog posts found
                         blogRow.append("<p>No blog posts available</p>");
                     } else {
+                        const user = firebase.auth().currentUser;
                         querySnapshot.forEach((doc) => {
                             const post = doc.data();
                             const date = post.date.toDate();
@@ -266,9 +282,11 @@
                                 date.getDate() +
                                 "/" +
                                 date.getFullYear();
-                            const shortContent = post.content.substring(50, 80) + "...";
+                            const shortContent = post.content.substring(40, 50) + "...";
                             const renderedContent = marked.parse(shortContent); // Render Markdown content
-                            const blogHtml = `
+                            let blogHtml;
+                            
+                            if(user) blogHtml = `
                                 <div class="col-md-4 col-sm-6">
                                     <div class="single-blog">
                                         <figure>
@@ -278,12 +296,44 @@
                                             <small>By ${post.author} | ${formattedDate}</small>
                                             <h4>${post?.title}</h4>
                                             <div class="content">${renderedContent}</div>
-                                            <div class="link">
-                                                <a href="full_blog.html?blogId=${doc.id}">Read more</a><i class="fas fa-long-arrow-alt-right"></i>
+                                            <div class="blog-footer">
+                                                
+                                                <div class="link">
+                                                    <a href="full_blog.html?blogId=${doc.id}">Read more</a><i class="fas fa-long-arrow-alt-right"></i>
+                                                </div>
+                                                <div>
+                                                    
+                                                    <a href="edit_blog.html?blogId=${doc.id}"><i class="fas fa-edit "></i></a>
+                                                    <a href="#" onclick="deleteBlog('${doc.id}')"><i class="fas fa-trash"></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>`;
+
+                            else {
+                                blogHtml= `
+                                 <div class="col-md-4 col-sm-6">
+                                    <div class="single-blog">
+                                        <figure>
+                                            <img src="${post?.image}" alt="">
+                                        </figure>
+                                        <div class="blog-detail">
+                                            <small>By ${post.author} | ${formattedDate}</small>
+                                            <h4>${post?.title}</h4>
+                                            <div class="content">${renderedContent}</div>
+                                            <div class="blog-footer">
+                                                
+                                                <div class="link">
+                                                    <a href="full_blog.html?blogId=${doc.id}">Read more</a><i class="fas fa-long-arrow-alt-right"></i>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            }
+                            blogHtml += `</div></div></div>`;
                             blogRow.append(blogHtml);
                         });
                     }

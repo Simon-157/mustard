@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donate Now</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="assets/images/fav.jpg" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/slider/css/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/slider/css/owl.theme.default.css"
+    />
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <style>
+      /* Custom CSS styles */
+      .donate-container {
+        max-width: 500px;
+      }
+
+      .donate-container {
+        max-width: 500px;
+      }
+
+      /* Loader styles */
+      .loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      .loader {
+        border: 8px solid #f3f3f3;
+        /* Light grey */
+        border-top: 8px solid #3498db;
+        /* Blue */
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Loader -->
+    <div class="loader-overlay" id="loader-overlay">
+      <div class="loader"></div>
+    </div>
+    <!-- Header -->
+
+    <header class="continer-fluid">
+      <div class="header-top">
+        <div class="container">
+          <div class="row col-det">
+            <div class="col-lg-6 d-none d-lg-block">
+              <ul class="ulleft">
+                <li>
+                  <i class="far fa-envelope"></i>
+                  mustardseedministries5@gmail.com
+                  <span>|</span>
+                </li>
+                <li>
+                  <i class="fas fa-phone-volume"></i>
+                  +263 77 211 1382
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 folouws">
+              <ul class="ulright">
+                <li><small>Folow Us </small>:</li>
+                <li>
+                  <i class="fab fa-facebook-square"></i>
+                </li>
+                <li>
+                  <i class="fab fa-twitter-square"></i>
+                </li>
+                <li>
+                  <i class="fab fa-instagram"></i>
+                </li>
+                <li>
+                  <i class="fab fa-linkedin"></i>
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed">
+              <button class="btn btn-sm btn-success">Join Us</button>
+              <button class="btn btn-sm btn-default">Donate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="menu-jk" class="header-bottom">
+        <div class="container">
+          <div class="row nav-row">
+            <div class="col-lg-3 col-md-12 logo">
+              <a href="index.html">
+                <img src="assets/images/logo-small.jpg" alt="" /><span
+                  id="logo-text"
+                  >MUSTARD SEED MINISTRIES</span
+                >
+                <a data-toggle="collapse" data-target="#menu" href="#menu"
+                  ><i class="fas d-block d-lg-none small-menu fa-bars"></i
+                ></a>
+              </a>
+            </div>
+            <div id="menu" class="col-lg-9 col-md-12 d-none d-lg-block nav-col">
+              <ul class="navbad">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.html">Home </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="services.html">Ministries</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="gallery.html">Gallery</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="blog.html">Blog</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about_us.html">About us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="contact_us.html">Contact us</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container donate-container mt-5">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Make a Donation</h5>
+          <form id="donation-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                name="address"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phone"
+                name="phone"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="amount">Donation Amount ($)</label>
+              <input
+                type="number"
+                class="form-control"
+                id="amount"
+                name="amount"
+                min="1"
+                step="1"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="card-element">Credit or Debit Card</label>
+              <div id="card-element" class="form-control">
+                <!-- A Stripe Element will be inserted here. -->
+              </div>
+            </div>
+            <!-- Used to display form errors -->
+            <div id="card-errors" role="alert" class="text-danger"></div>
+            <button id="submit-button" class="btn btn-primary mt-3">
+              Donate Now
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div
+      class="modal fade"
+      id="successModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="successModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="successModalLabel">Thank You!</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Your donation has been successfully processed. Thank you for your
+              contribution!
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script>
+      // Stripe setup
+      var stripe = Stripe(
+        "pk_test_51OvIzTRtDHBqT6m5oJVMiv5uh5nLiQgfwopl8dFtlW7n8y6mo3PVkWQjHTsfIXG5Ic52PmL3G2m0Zs9p06wpCqiL00fMuokwca"
+      );
+      var elements = stripe.elements();
+      var card = elements.create("card");
+
+      // Mount card element
+      card.mount("#card-element");
+
+      // Handle real-time validation errors from the card Element
+      card.addEventListener("change", function (event) {
+        var displayError = document.getElementById("card-errors");
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = "";
+        }
+      });
+
+      // Handle form submission
+      $("#donation-form").on("submit", function (event) {
+        event.preventDefault();
+        var $form = $(this);
+        $("#submit-button").prop("disabled", true);
+
+        // Show loader
+        $("#loader-overlay").show().css("display", "flex");
+
+        stripe
+          .createPaymentMethod({
+            type: "card",
+            card: card,
+          })
+          .then(function (result) {
+            if (result.error) {
+              var errorElement = document.getElementById("card-errors");
+              errorElement.textContent = result.error.message;
+              $("#submit-button").prop("disabled", false);
+              // Hide loader on error
+              $("#loader-overlay").hide();
+            } else {
+              $.ajax({
+                url: "https://mustard-donor.onrender.com/charge",
+                method: "POST",
+                data: {
+                  payment_method_id: result.paymentMethod.id,
+                  amount: $("#amount").val(),
+                },
+                success: function (response) {
+                  // Show success modal
+                  $("#successModal").modal("show");
+                  // Reset form
+                  $form.trigger("reset");
+                  $("#submit-button").prop("disabled", false);
+                  // Hide loader on success
+                  $("#loader-overlay").hide();
+                },
+                error: function (xhr, status, error) {
+                  console.error(xhr.responseText);
+                  alert("Error occurred. Please try again.");
+                  $("#submit-button").prop("disabled", false);
+                  // Hide loader on error
+                  $("#loader-overlay").hide();
+                },
+              });
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

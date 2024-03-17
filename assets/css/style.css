@@ -14,7 +14,28 @@ coder name:Prabin Raja
   list-style: none; }
 
 img {
-  max-width: 100%; }
+  max-width: 100%; 
+}
+
+/* auth screen custom styles */
+
+#login-form, #register-form {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+#toggle-register, #toggle-login {
+  cursor: pointer;
+}
+
+.auth{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 a {
   text-decoration: none;
@@ -414,6 +435,7 @@ header {
 .slider-img img {
   opacity: 1;
   position: relative;
+  /* height:80vh ; */
   z-index: -1; }
 
 .slider .owl-nav .owl-prev,

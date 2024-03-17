@@ -39,6 +39,10 @@ $( document ).ready(function() {
 });
 
 
+    // onlick functionality for donate button
+    $('.donate').click(function(){
+        window.location.href = "donation.html";
+    })
 
 
 $(document).ready(function(){
@@ -67,3 +71,6 @@ $(this).removeClass("active");
 $(this).addClass("active");
 
 });
+
+
+
