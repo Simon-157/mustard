@@ -3,51 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Social Media Sharing</title>
+  <title>Social Media Sharing Popup</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- ShareThis plugin -->
-  <!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
-  <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=65ff3d8a0afe31001276bb15&product=inline-share-buttons"></script>
 </head>
 <body>
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <h1 class="text-center mb-4">Share This Page</h1>
-        <button class="btn btn-primary btn-block share-btn" data-url="https://example.com/page-to-share">Share on Social Media</button>
-      </div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="text-center">Social Media Sharing</h2>
+      <!-- Button to trigger social media sharing popup -->
+      <button id="shareButton" class="btn btn-primary btn-block">Share on Social Media</button>
     </div>
   </div>
+</div>
 
-  <!-- JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- JavaScript for triggering social media sharing using Web Share API -->
+<script>
+  document.getElementById('shareButton').addEventListener('click', function() {
+    // Check if the Web Share API is supported by the browser
+    if (navigator.share) {
+      // Customize URL and text to share
+      var urlToShare = window.location.href;
+      var shareData = {
+        title: 'Check out this awesome page!',
+        url: urlToShare
+      };
 
-  <!-- Custom Script -->
-  <script>
-    $(document).ready(function() {
-      $('.share-btn').on('click', function() {
-        var url = $(this).data('url');
-        var shareThisConfig = {
-          url: url,
-          title: 'Check out this page!',
-          description: 'Description of the page goes here.',
-          buttons: {
-            facebook: {
-              description: 'Custom description for Facebook'
-            },
-            twitter: {
-              via: 'twitterusername',
-              text: 'Custom text for Twitter'
-            }
-          }
-        };
-        // Call ShareThis's share method
-        SHARETHIS.inlineShareCallbacks.doShare(shareThisConfig);
-      });
-    });
-  </script>
+      // Call the share() method to trigger the native sharing UI
+      navigator.share(shareData)
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing:', error));
+    } else {
+      // Web Share API not supported, provide fallback
+      alert('Web Share API is not supported by your browser.');
+      // You can provide fallback sharing options here if needed
+    }
+  });
+</script>
+
 </body>
 </html>
