@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Mustard Seed Ministries</title>
     <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon">
-   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.1/lib/marked.umd.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <link rel="shortcut icon" href="assets/images/fav.jpg">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
@@ -249,69 +253,17 @@
     
     
     <!-- ################# Our Blog Starts Here#######################--->
-
-    <section class="our-blog">
-         	<div class="container">
-         		<div class="row session-title">
-        			<h2> Our Blog </h2>
+ <section class="our-blog">
+      <div class="container">
+        <div class="row session-title">
+        			<h2>Latest Stories </h2>
         			<p>Take a look at what GOD is doing in our midst</p>
         		</div>
-        		<div class="blog-row row">
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="assets/images/events/image_01.jpg" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Ms. Muteve | August 10 2022</small>
-								<h4>Loreum Ipsum</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="assets/images/events/image_02.jpg" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Ms. Muteve | August 10 2022</small>
-								<h4>Loreum Ipsum</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-        			<div class="col-md-4 col-sm-6">
-        				<div class="single-blog">
-        					<figure>
-        						<img src="assets/mustard_seed/g19.jpeg" alt="">
-        					</figure>
-        					<div class="blog-detail">
-        						<small>By Admin | August 10 2018</small>
-								<h4>Loreum Ipsum</h4>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis sed sagittis at, sagittis quis neque. Praesent.</p>
-								<div class="link">
-									<a href="">Read more </a><i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-        					</div>
-        					
-        					
-        				</div>
-        			</div>
-        		</div>
-         	</div>
-         </section>
-
+        <div class="blog-row row" id="blogRow">
+          <!-- Blog posts will be dynamically added here -->
+        </div>
+      </div>
+    </section>
 
         <!-- ################# Footer Starts Here#######################---> 
           
@@ -361,7 +313,99 @@
 <script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
 <script src="assets/plugins/slider/js/owl.carousel.min.js"></script>
 <script src="assets/js/script.js"></script>
+<script src="assets/js/db.js"></script>
+
 <script>
+
+      $(document).ready(function () {
+        const blogRow = $("#blogRow");
+
+ // Add loading state
+        const loadingHtml = `
+                <div class="col-md-4 col-sm-6">
+                    <div class="single-blog loading">
+                        <div class="card">
+                            <div class="skeleton-bg" style="height:200px;"></div>
+                            <div class="card-body">
+                                <h5 class="skeleton-bg" style="height:20px;"></h5>
+                                <p class="skeleton-bg" style="height:15px;"></p>
+                                <p class="skeleton-bg" style="height:15px;"></p>
+                                <p class="skeleton-bg" style="height:15px;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+        for (let i = 0; i < 3; i++) {
+          blogRow.append(loadingHtml);
+        }
+
+        db.collection("blogPosts")
+          .orderBy("date", "desc")
+          .limit(3)
+          .get()
+          .then((querySnapshot) => {
+            // Remove loading state
+            blogRow.empty();
+
+            if (querySnapshot.empty) {
+              // No blog posts found
+              blogRow.append("<p>No blog posts available</p>");
+            } else {
+              const userId = localStorage.getItem("userId");
+              userId
+                ? $(".add-blog").css("display", "block")
+                : $(".add-blog").css("display", "none");
+
+              querySnapshot.forEach((doc) => {
+                const post = doc.data();
+                const date = post.date.toDate();
+                const formattedDate =
+                  date.getMonth() +
+                  1 +
+                  "/" +
+                  date.getDate() +
+                  "/" +
+                  date.getFullYear();
+                const shortContent = post.content.substring(40, 50) + "...";
+                const renderedContent = marked.parse(shortContent); // Render Markdown content
+                let blogHtml;                          
+                  blogHtml = `
+                        <div class="col-md-4 col-sm-6">
+                            <div class="single-blog">
+                                <figure>
+                                    <img src="${post?.image}" alt="">
+                                </figure>
+                                <div class="blog-detail">
+                                    <small>By ${post.author} | ${formattedDate}</small>
+                                    <h4>${post?.title}</h4>
+                                    <div class="content">${renderedContent}</div>
+                                    <div class="blog-footer">
+                                        
+                                        <div class="link">
+                                            <a href="full_blog.html?blogId=${doc.id}">Read more</a><i class="fas fa-long-arrow-alt-right"></i>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                
+                blogRow.append(blogHtml)
+
+              });
+
+            }
+          })
+          .catch((error) => {
+            console.error("Error getting blog posts: ", error);
+            blogRow.append("<p>Error getting blog posts</p>");
+          });
+
+        
+      });
+
+
+
 
 </script>
 </html>
