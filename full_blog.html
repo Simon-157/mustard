@@ -7,6 +7,7 @@
   <title>Mustard Seed Ministries</title>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/marked@12.0.1/lib/marked.umd.min.js"></script>
 
   <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon" />
@@ -83,7 +84,7 @@
           </div>
           <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed">
             <button class="btn btn-sm btn-success">Join Us</button>
-            <button class="btn btn-sm btn-default">Donate</button>
+            <button class="btn btn-sm btn-default donate">Donate</button>
           </div>
         </div>
       </div>
@@ -111,7 +112,7 @@
               </li>
              
              
-               <li class="nav-item">
+               <li class="nav-item add-blog" style="display: none;">
                         <a href="createblog.html" style="color: #5cb85c;" class="nav-link"><i class="fas fa-plus create-icon"></i> Create</a>
                     </li>
             </ul>
@@ -187,11 +188,19 @@
   <script src="assets/js/script.js"></script>
   <script src="assets/js/db.js"></script>
   <script>
+    $(document).ready(() => {
+       const userId = localStorage.getItem("userId");
+              userId
+                ? $(".add-blog").css("display", "block")
+                : $(".add-blog").css("display", "none");
+
+    })
       // Fetch specific blog details based on document ID
       const urlParams = new URLSearchParams(window.location.search);
       const blogId = urlParams.get("blogId");
 
       if (blogId) {
+        
         db.collection("blogPosts")
           .doc(blogId)
           .get()

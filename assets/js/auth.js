@@ -8,6 +8,7 @@ $('#login-form').submit(function(event) {
     .then(function(user) {
       // Handle successful login
       console.log("Logged in successfully!");
+      localStorage.setItem("userId", user.uid);
        window.location.href = "/createblog.html";
     })
     .catch(function(error) {
