@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="assets/plugins/slider/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/plugins/slider/css/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+      <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <meta property="og:title" content="Mustard Seed Ministries">
+  <meta property="og:description" content="Check out this awesome page!">
+  <meta property="og:image" content="https://mustard-nu.vercel.app/assets/images/logo-small.jpg">
+  <meta property="og:url" content="http://www.example.com/page.html">
 </head>
 
 <body>
@@ -157,12 +162,10 @@
                         </div>
                     </div>
                      <div class="col-md-6">
-                        <a href="index.html#current">
-                        <div class="about-qcard ">
+                        <div id="shareButton" class="about-qcard" data-toggle="modal" data-target="#socialMediaModal">
                            <i class="fas fa-search-dollar red"></i>
                             <p>Quick Fundraising</p>
                         </div>
-                        </a>
                     </div>
                     <div class="col-md-6">
                          <a href="services.html#donate">
@@ -212,7 +215,7 @@
       <div class="container">
           <div class="row mission">
               <div class="col-md-6 mv-det">
-                  <h1>Our Vision</h1>
+                  <h1 id="vision">Our Vision</h1>
                   <p>To give holistic care to vulnerable children and adults in Zimbabwe. <br>To develop a one stop community Centre that provide vulnerable people access to quality education, healthcare, social services and a well balanced social and spiritual life by capable professionals</p>
               </div>
               <div class="col-md-6 mv-img">
@@ -372,10 +375,85 @@
     
 
 </footer>
-          
-    
-</body>
 
+<!-- Modal -->
+<div class="modal fade" id="socialMediaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Quick Fundraising</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- AddToAny share buttons -->
+              <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="https://mustard-nu.vercel.app/donation.html" data-a2a-title="Donate to support Mustard works" data-a2a-image="https://mustard-nu.vercel.app/assets/images/logo-small.jpg">
+                <a class="a2a_button_facebook"></a>
+                <a class="a2a_button_twitter"></a>
+                <a class="a2a_button_whatsapp"></a>
+                <a class="a2a_button_linkedin"></a>
+                <a class="a2a_button_email"></a>
+                <a class="a2a_button_copy_link"></a>
+                <a class="a2a_button_print"></a>
+                <a class="a2a_button_pinterest"></a>
+                <a class="a2a_button_telegram"></a>
+                <a class="a2a_button_reddit"></a>
+                <a class="a2a_button_vk"></a>
+                <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <!-- Button to trigger social media sharing -->
+      <button id="shareButton" class="btn btn-primary btn-block" data-toggle="modal" data-target="#socialMediaModal">Share on Social Media</button>
+    </div>
+  </div>
+</div>
+
+</body>
+<!-- Social Media Sharing -->
+<script>
+   // Function to open the modal
+  function openModal() {
+    $('#socialMediaModal').modal('show');
+  }
+
+  // Attach the function to the click event of the button
+  document.getElementById('shareButton').addEventListener('click', openModal);
+
+  document.getElementById('shareButton').addEventListener('click', function() {
+    // Check if the Web Share API is supported by the browser
+    if (navigator.share) {
+      // Customize URL and text to share
+      var urlToShare = window.location.href;
+      var shareData = {
+        title: 'Check out this awesome page!',
+        url: urlToShare
+      };
+
+      // Call the share() method to trigger the native sharing UI
+      navigator.share(shareData)
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing:', error));
+    } else {
+      // Web Share API not supported, provide fallback (AddToAny)
+      console.log('Web Share API not supported');
+      document.querySelector('.a2a_kit').style.display = 'block';
+    }
+  });
+</script> 
 <script src="assets/js/jquery-3.2.1.min.js"></script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
