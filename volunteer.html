@@ -40,7 +40,7 @@
     }
 
     .loader {
-      border: 8px solid #f3f3f3;
+      border: 5px solid #f3f3f3;
       /* Light grey */
       border-top: 8px solid #3498db;
       /* Blue */
@@ -246,25 +246,25 @@
 
             if (!nameRegex.test(name)) {
                 $('#name').after('<div class="error-message text-danger">Please enter a valid name</div>');
-                $('#loader').hide(); // Hide loader
+                $('#loader-overlay').hide(); // Hide loader
                 return;
             }
 
             if (!emailRegex.test(email)) {
                 $('#email').after('<div class="error-message text-danger">Please enter a valid email address</div>');
-                $('#loader').hide(); // Hide loader
+                $('#loader-overlay').hide(); // Hide loader
                 return;
             }
 
             if (!address) {
                 $('#address').after('<div class="error-message text-danger">Please enter your address</div>');
-                $('#loader').hide(); // Hide loader
+                $('#loader-overlay').hide(); // Hide loader
                 return;
             }
 
             if (!phoneRegex.test(phone)) {
                 $('#phone').after('<div class="error-message text-danger">Please enter a valid 10-digit phone number</div>');
-                $('#loader').hide(); // Hide loader
+                $('#loader-overlay').hide(); // Hide loader
                 return;
             }
 
@@ -274,7 +274,7 @@
             if (!recaptchaResponse) {
                 alert('Please complete the CAPTCHA validation');
                 $('g-recaptcha').after('<div class="error-message text-danger">Please complete the CAPTCHA validation</div>');
-                $('#loader').hide(); // Hide loader
+                $('#loader-overlay').hide(); // Hide loader
                 return;
             }
 
