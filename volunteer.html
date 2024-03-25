@@ -273,7 +273,7 @@
             var recaptchaResponse = grecaptcha.getResponse();
             if (!recaptchaResponse) {
                 alert('Please complete the CAPTCHA validation');
-                <div class="error-message text-danger">Please complete the CAPTCHA validation</div>
+                $('g-recaptcha').after('<div class="error-message text-danger">Please complete the CAPTCHA validation</div>');
                 $('#loader').hide(); // Hide loader
                 return;
             }
