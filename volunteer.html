@@ -28,8 +28,6 @@
     /* Loader styles */
     .loader-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
@@ -228,7 +226,7 @@
             event.preventDefault();
 
             // Show loader
-            $('#loader-overlay').show();
+            $('#loader-overlay').show().css('display', 'flex');
 
             // Remove any existing error messages
             $('.error-message').remove();
