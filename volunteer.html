@@ -285,7 +285,7 @@
                     // Handle success response
                     $('#successModal').modal('show');
                     $('#volunteer-form').trigger('reset');
-                    $('#loader').hide(); // Hide loader
+                    $('#loader-overlay').hide(); // Hide loader
                 },
                 error: function (xhr, status, error) {
                     // Handle error response
