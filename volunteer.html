@@ -283,9 +283,9 @@
                 data: $('#volunteer-form').serialize(),
                 success: function (response) {
                     // Handle success response
+                    $('#loader-overlay').hide(); // Hide loader
                     $('#successModal').modal('show');
                     $('#volunteer-form').trigger('reset');
-                    $('#loader-overlay').hide(); // Hide loader
                 },
                 error: function (xhr, status, error) {
                     // Handle error response
