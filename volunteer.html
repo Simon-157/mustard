@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="assets/plugins/slider/css/owl.carousel.min.css" />
   <link rel="stylesheet" href="assets/plugins/slider/css/owl.theme.default.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LcDmaQpAAAAAARg5048GRMCVKNHW_g-pEHVNC86" type="text/javascript"></script>
 
   <style>
     /* Custom CSS styles */
@@ -180,8 +180,8 @@
           </div>
  
 
-          <!-- Google reCAPTCHA 6LcpmKQpAAAAAGuLUJ71248YP1Ll3Kmo_mjwpY-->
-          <div class="g-recaptcha" data-sitekey="6LcpmKQpAAAAAF5KywyMOEgA4kKVQs60Rx1FuQkB"></div>
+          <!-- Google reCAPTCHA -->    
+          <div class="g-recaptcha" data-sitekey="6LcDmaQpAAAAAJr0GW7np7YB5BJB0L97p_fzBeCT"></div>
           <button id="submit-button" class="btn btn-primary mt-3">Submit</button>
         </form>
       </div>
@@ -219,7 +219,6 @@
   <script src="assets/js/jquery-3.2.1.min.js"></script>
   <script src="assets/js/popper.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
-  <script src="https://unpkg.com/smtp.js/dist/smtp.min.js"></script>
 
 <script>
   $(document).ready(function () {
@@ -267,7 +266,7 @@
         alert('Please complete the CAPTCHA validation');
         return;
       }
-      
+
       // Send form data to backend API
       $.ajax({
         type: 'POST',
