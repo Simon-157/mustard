@@ -45,6 +45,10 @@ $( document ).ready(function() {
     })
 
 
+       $('.join').click(function(){
+        window.location.href = "volunteer.html";
+    })
+
 $(document).ready(function(){
 
     $(".filter-button").click(function(){
