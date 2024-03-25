@@ -149,7 +149,9 @@
       </div>
     </div>
   </header>
-
+<div class="loader-overlay" id="loader-overlay">
+  <div class="loader" id="loader"></div>
+</div>
   <!-- Main Content -->
   <div class="container donate-container mt-5">
     <div class="card">
@@ -221,70 +223,81 @@
   <script src="assets/js/bootstrap.min.js"></script>
 
 <script>
-  $(document).ready(function () {
-    $('#submit-button').click(function (event) {
-      event.preventDefault();
+    $(document).ready(function () {
+        $('#submit-button').click(function (event) {
+            event.preventDefault();
 
-      // Remove any existing error messages
-      $('.error-message').remove();
+            // Show loader
+            $('#loader-overlay').show();
 
-      // Form validation
-      var name = $('#name').val();
-      var email = $('#email').val();
-      var address = $('#address').val();
-      var phone = $('#phone').val();
+            // Remove any existing error messages
+            $('.error-message').remove();
 
-      // Regular expressions for validation
-      var nameRegex = /^[a-zA-Z\s]+$/;
-      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      var phoneRegex = /^\d{10}$/;
+            // Form validation
+            var name = $('#name').val();
+            var email = $('#email').val();
+            var address = $('#address').val();
+            var phone = $('#phone').val();
 
-      if (!nameRegex.test(name)) {
-        $('#name').after('<div class="error-message text-danger">Please enter a valid name</div>');
-        return;
-      }
+            // Regular expressions for validation
+            var nameRegex = /^[a-zA-Z\s]+$/;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var phoneRegex = /^\d{10}$/;
 
-      if (!emailRegex.test(email)) {
-        $('#email').after('<div class="error-message text-danger">Please enter a valid email address</div>');
-        return;
-      }
+            if (!nameRegex.test(name)) {
+                $('#name').after('<div class="error-message text-danger">Please enter a valid name</div>');
+                $('#loader').hide(); // Hide loader
+                return;
+            }
 
-      if (!address) {
-        $('#address').after('<div class="error-message text-danger">Please enter your address</div>');
-        return;
-      }
+            if (!emailRegex.test(email)) {
+                $('#email').after('<div class="error-message text-danger">Please enter a valid email address</div>');
+                $('#loader').hide(); // Hide loader
+                return;
+            }
 
-      if (!phoneRegex.test(phone)) {
-        $('#phone').after('<div class="error-message text-danger">Please enter a valid 10-digit phone number</div>');
-        return;
-      }
+            if (!address) {
+                $('#address').after('<div class="error-message text-danger">Please enter your address</div>');
+                $('#loader').hide(); // Hide loader
+                return;
+            }
+
+            if (!phoneRegex.test(phone)) {
+                $('#phone').after('<div class="error-message text-danger">Please enter a valid 10-digit phone number</div>');
+                $('#loader').hide(); // Hide loader
+                return;
+            }
 
 
-       // Validate reCAPTCHA
-      var recaptchaResponse = grecaptcha.getResponse();
-      if (!recaptchaResponse) {
-        alert('Please complete the CAPTCHA validation');
-        return;
-      }
+             // Validate reCAPTCHA
+            var recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                alert('Please complete the CAPTCHA validation');
+                <div class="error-message text-danger">Please complete the CAPTCHA validation</div>
+                $('#loader').hide(); // Hide loader
+                return;
+            }
 
-      // Send form data to backend API
-      $.ajax({
-        type: 'POST',
-        url: 'https://mustard-donor.onrender.com/volunteer',
-        data: $('#volunteer-form').serialize(),
-        success: function (response) {
-          // Handle success response
-          $('#successModal').modal('show');
-          $('#volunteer-form').trigger('reset');
-        },
-        error: function (xhr, status, error) {
-          // Handle error response
-          console.error('Error:', error);
-          alert('Error submitting form: ' + xhr.responseText); // Displaying error message from API response
-        }
-      });
+            // Send form data to backend API
+            $.ajax({
+                type: 'POST',
+                url: 'https://mustard-donor.onrender.com/volunteer',
+                data: $('#volunteer-form').serialize(),
+                success: function (response) {
+                    // Handle success response
+                    $('#successModal').modal('show');
+                    $('#volunteer-form').trigger('reset');
+                    $('#loader').hide(); // Hide loader
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                    console.error('Error:', error);
+                    alert('Error submitting form: ' + xhr.responseText); // Displaying error message from API response
+                    $('#loader-overlay').hide(); // Hide loader
+                }
+            });
+        });
     });
-  });
 </script>
 
 </body>
