@@ -4,6 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="Mustard Seed Ministries">
+    <meta property="og:description" content="Check out this awesome page!">
+    <meta property="og:image" content="https://mustard-nu.vercel.app/assets/images/logo-small.jpg">
+    <meta property="og:url" content="https://mustard-nu.vercel.app">
     <title>Mustard Seed Ministries</title>
     <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
@@ -15,14 +19,22 @@
     <link rel="stylesheet" href="assets/plugins/slider/css/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <script async src="https://static.addtoany.com/menu/page.js"></script>
-    <meta property="og:title" content="Mustard Seed Ministries">
-    <meta property="og:description" content="Check out this awesome page!">
-    <meta property="og:image" content="https://mustard-nu.vercel.app/assets/images/logo-small.jpg">
-    <meta property="og:url" content="https://mustard-nu.vercel.app">
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+      <script src="https://www.google.com/recaptcha/api.js?render=6LcDmaQpAAAAAARg5048GRMCVKNHW_g-pEHVNC86" type="text/javascript"></script>
+
+
+
 </head>
 
 <body>
-
+    <!-- Loader -->
+    <div class="loader-overlay" id="loader-overlay">
+        <div class="loader"></div>
+    </div>
     <header class="continer-fluid ">
         <div class="header-top">
             <div class="container">
@@ -100,10 +112,10 @@
                                 <a class="nav-link" href="about_us.html">About us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="contact_us.html">Contact us</a>
+                                <button class="btn btn-primary my-2 my-sm-0 logout">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
                             </li>
-
-
 
 
                         </ul>
@@ -124,6 +136,15 @@
                 <ul>
                     <li> <a href="#"><i class="fas fa-home"></i> Home</a></li>
                     <li><i class="fas fa-angle-double-right"></i> About Us</li>
+                    <!-- Button to trigger the modal -->
+                    <li>
+                        <i class="fas fa-angle-double-right"></i>
+                    </li>
+                    <button type="button" id="create-beneficiary" class="btn btn-primary" data-toggle="modal"
+                        data-target="#addBeneficiaryModal">
+                        Add Beneficiary
+                    </button>
+
                 </ul>
             </div>
         </div>
@@ -190,11 +211,13 @@
                             </a>
                         </div>
                         <div class="col-md-6">
-                            <div class="about-qcard ">
-                                <i class="fas fa-hands-helping blu"></i>
-                                <p>Help Someone</p>
+                                <a href="#helpsomeone">
+                                <div class="about-qcard ">
+                                    <i class="fas fa-hands-helping blu"></i>
+                                    <p>Help Someone</p>
+                                </div>
+                            </a>
                             </div>
-                        </div>
                     </div>
                 </div>
                 <div class="text-part col-md-12">
@@ -314,57 +337,19 @@
             </div>
         </div>
     </section>
-
-    <!--################### Our TBeneficiaries Starts Here #######################--->
-    <section class="our-team team-11">
-        <div class="container">
-            <div class="session-title row">
-                <h2>Beneficiaries</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla vel nisl a dictum. Donec ut
-                    est arcu. Donec hendrerit velit</p>
-            </div>
-            <div class="row team-row">
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-usr">
-                        <img src="assets/images/beneficiaries/beneficiary_1.jpg" alt="">
-                        <div class="det-o">
-                            <h4>Lorem ipsum dolor</h4>
-                            <i>sit amet</i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-usr">
-                        <img src="assets/images/beneficiaries/beneficiary_2.jpg" alt="">
-                        <div class="det-o">
-                            <h4>Lorem ipsum dolor</h4>
-                            <i>sit amet</i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-usr">
-                        <img src="assets/images/beneficiaries/beneficiary_3.jpg" alt="">
-                        <div class="det-o">
-                            <h4>Lorem ipsum dolor</h4>
-                            <i>sit amet</i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-usr">
-                        <img src="assets/images/beneficiaries/beneficiary_4.jpg" alt="">
-                        <div class="det-o">
-                            <h4>Lorem ipsum dolor</h4>
-                            <i>sit amet</i>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
+<!--################### Our TBeneficiaries Starts Here #######################--->
+<section class="our-team team-11" id="helpsomeone">
+    <div class="container">
+        <div class="session-title row">
+            <h2>Beneficiaries</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla vel nisl a dictum. Donec ut
+                est arcu. Donec hendrerit velit</p>
         </div>
-    </section>
+        <div class="row team-row" id="beneficiaries-container">
+            <!-- Beneficiaries will be dynamically inserted here -->
+        </div>
+    </div>
+</section>
 
 
 
@@ -465,6 +450,116 @@
         </div>
     </div>
 
+    <!--  ADD BENEFICIARY MODAL SECTION -->
+    <div class="modal fade" id="addBeneficiaryModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEventModalLabel">Add Beneficiary</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="eventForm">
+                        <div class="form-group">
+                            <label for="fname">First Name</label>
+                            <input type="text" class="form-control" id="fname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lname">Last Name</label>
+                            <input class="form-control" id="lname" rows="3" required></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="p_email">Email</label>
+                            <input type="email" class="form-control" id="p_email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="personImg">Person Image</label>
+                            <input type="file" class="form-control-file" id="personImg" accept="image/*" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveBeneficiaryBtn">Add Beneficiary</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--  HELP BENEFICIARY MODAL SECTION -->
+    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="helpModalLabel">Provide Your Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="helpForm">
+                        <div class="form-group">
+                            <label for="fname">Name</label>
+                            <input type="text" class="form-control" id="h_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="h_phone">Phone</label>
+                            <input  type="text" class="form-control" id="h_phone" rows="3" required></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="h_email">Email</label>
+                            <input type="email" class="form-control" id="h_email" required>
+                        </div>
+
+
+ 
+
+          <!-- Google reCAPTCHA -->    
+          <div class="g-recaptcha" data-sitekey="6LcDmaQpAAAAAJr0GW7np7YB5BJB0L97p_fzBeCT"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="helpBtn">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+      <!-- Success Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">Thank You!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Your Request to help our beneficiaryhas been successfully processed. We will get back to you as soon as possible.
+            <span> Thank you for your kindness </span>
+
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 <!-- Social Media Sharing -->
 <script>
@@ -502,7 +597,10 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
 <script src="assets/plugins/slider/js/owl.carousel.min.js"></script>
+<script src="assets/js/db.js"></script>
 <script src="assets/js/script.js"></script>
+<script src="assets/js/beneficiary.js"></script>
+<script src="assets/js/auth.js"></script>
 
 
 </html>

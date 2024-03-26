@@ -141,6 +141,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="contact_us.html">Contact us</a>
               </li>
+              <li class="nav-item">
+                <button class="btn btn-primary my-2 my-sm-0 logout" type="submit">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -244,89 +249,7 @@
   <script src="assets/js/jquery-3.2.1.min.js"></script>
   <script src="assets/js/popper.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
-  <script>
-
-    // Handle donation method selection
-    $('#donation-method').change(function () {
-      var selectedOption = $(this).val();
-      if (selectedOption === 'mobile-money') {
-        $('.credit-card-fields').hide();
-        $('.mobile-money-fields').show();
-      } else {
-        $('.mobile-money-fields').hide();
-        $('.credit-card-fields').show();
-      }
-    });
-    // Stripe setup
-    var stripe = Stripe(
-      "pk_test_51OvIzTRtDHBqT6m5oJVMiv5uh5nLiQgfwopl8dFtlW7n8y6mo3PVkWQjHTsfIXG5Ic52PmL3G2m0Zs9p06wpCqiL00fMuokwca"
-    );
-    var elements = stripe.elements();
-    var card = elements.create("card");
-
-    // Mount card element
-    card.mount("#card-element");
-
-    // Handle real-time validation errors from the card Element
-    card.addEventListener("change", function (event) {
-      var displayError = document.getElementById("card-errors");
-      if (event.error) {
-        displayError.textContent = event.error.message;
-      } else {
-        displayError.textContent = "";
-      }
-    });
-
-    // Handle form submission
-    $("#donation-form").on("submit", function (event) {
-      event.preventDefault();
-      var $form = $(this);
-      $("#submit-button").prop("disabled", true);
-
-      // Show loader
-      $("#loader-overlay").show().css("display", "flex");
-
-      stripe
-        .createPaymentMethod({
-          type: "card",
-          card: card,
-        })
-        .then(function (result) {
-          if (result.error) {
-            var errorElement = document.getElementById("card-errors");
-            errorElement.textContent = result.error.message;
-            $("#submit-button").prop("disabled", false);
-            // Hide loader on error
-            $("#loader-overlay").hide();
-          } else {
-            $.ajax({
-              url: "https://mustard-donor.onrender.com/charge",
-              method: "POST",
-              data: {
-                payment_method_id: result.paymentMethod.id,
-                amount: $("#amount").val(),
-              },
-              success: function (response) {
-                // Show success modal
-                $("#successModal").modal("show");
-                // Reset form
-                $form.trigger("reset");
-                $("#submit-button").prop("disabled", false);
-                // Hide loader on success
-                $("#loader-overlay").hide();
-              },
-              error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-                alert("Error occurred. Please try again.");
-                $("#submit-button").prop("disabled", false);
-                // Hide loader on error
-                $("#loader-overlay").hide();
-              },
-            });
-          }
-        });
-    });
-  </script>
+  <script src="assets/js/donation.js"></script>
 </body>
 
 </html>

@@ -7,14 +7,16 @@
     <meta property="og:title" content="Mustard Seed Ministries">
     <meta property="og:description" content="Check out this awesome page!">
     <meta property="og:image" content="https://mustard-nu.vercel.app/assets/images/logo-small.jpg">
+    
     <meta property="og:url" content="https://mustard-nu.vercel.app/">
     <title>Mustard Seed Ministries</title>
     <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked@12.0.1/lib/marked.umd.min.js"></script>
-
+    
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
     <link rel="shortcut icon" href="assets/images/fav.jpg">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
@@ -186,47 +188,17 @@
 
 
     <!-- ################# Events Start Here#######################--->
+  
+    <!-- ################# Events Start Here#######################--->
     <section class="events">
         <div class="container">
-            <div class="session-title row">
-                <h2>Current Causes</h2>
-                <p>Running causes that needs your support. It's your time to make impact</p>
-            </div>
-            <div class="event-ro row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="event-box">
-                        <img src="assets/images/events/image_08.jpg" alt="">
-                        <h4>Fees for RCU students</h4>
-
-                        <p class="raises"><span>Raised : $2,425</span> / $3,000 </p>
-                        <p class="desic">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's </p>
-                        <button class="btn btn-success btn-sm">Donate Now</button>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="event-box">
-                        <img src="assets/images/events/image_06.jpg" alt="">
-                        <h4>Fees for Runyararo students</h4>
-                        <p class="raises"><span>Raised : $425</span> / $500 </p>
-                        <p class="desic">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's </p>
-                        <button class="btn btn-success btn-sm">Donate Now</button>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="event-box">
-                        <img src="assets/mustard_seed/g16.jpeg" alt="">
-                        <h4>Clothing for Shekina patients</h4>
-                        <p class="raises" id="current"><span>Raised : $425</span> / $500 </p>
-                        <p class="desic">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's </p>
-                        <button class="btn btn-success btn-sm donate">Donate Now</button>
-                    </div>
-                </div>
+            <h2 class="text-center ">Current Events</h2>
+            <div class="event-ro row" id="services">
+                <!-- Dynamic content will be rendered here -->
             </div>
         </div>
     </section>
+
 
     <!-- ################# Charity Number Starts Here#######################--->
 
@@ -331,7 +303,7 @@
 <script src="assets/plugins/slider/js/owl.carousel.min.js"></script>
 <script src="assets/js/script.js"></script>
 <script src="assets/js/db.js"></script>
-
+<script src="assets/js/events.js"></script>
 <script>
 
     $(document).ready(function () {

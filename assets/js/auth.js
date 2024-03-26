@@ -50,3 +50,24 @@ $('#toggle-login').click(function() {
   $('#login-form').show();
   $('#register-form').hide();
 });
+
+$('.logout').click(function() {
+  firebase.auth().signOut().then(function() {
+    console.log('Signed Out');
+    localStorage.removeItem('userId');
+    window.location.href = "/auth.html";
+  }).catch(function(error) {
+    alert("Could not sign you out");
+    console.error(error);
+  });
+});
+
+// todo: then change the logout to login both the text and the icon
+if(!localStorage.getItem('userId')){
+  $('.logout').text("Login");
+  $('.logout').prepend('<i class="fas fa-sign-in-alt"></i> ');
+  $('.logout').attr("href", "/auth.html");
+
+}
+
+
