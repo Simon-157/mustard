@@ -1,65 +1,43 @@
+const authorName = document.getElementById("blogAuthor");
+const titleField = document.getElementById("blogTitle");
+const contentField = document.getElementById("blogContent");
+const submitBtn = document.getElementById("submitBlogBtn");
 
+// Initialize SimpleMDE
+const simplemde = new SimpleMDE({
+    element: contentField,
+    forceSync: true,
+});
 
-// // Function to create a new blog post
-// async function createBlogPost(blogData) {
-//   try {
-//     const docRef = await db.collection('blogs').add(blogData);
-//     console.log('Blog post added with ID: ', docRef.id);
-//     return docRef.id;
-//   } catch (error) {
-//     console.error('Error adding blog post: ', error);
-//     throw error;
-  
-// // Function to update an existing blog post
-// async function updateBlogPost(blogId, updatedData) {
-//   try {
-//     await db.collection('blogs').doc(blogId).update(updatedData);
-//     console.log('Blog post updated successfully');
-//   } catch (error) {
-//     console.error('Error updating blog post: ', error);
-//     throw error;
-//   }
-// }
+// Check authentication state change
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        authorName.value = user.email.split("@")[0];
+    } else {
+        window.location.href = "auth.html";
+    }
+});
 
-// // Function to delete a blog post
-// async function deleteBlogPost(blogId) {
-//   try {
-//     await db.collection('blogs').doc(blogId).delete();
-//     console.log('Blog post deleted successfully');
-//   } catch (error) {
-//     console.error('Error deleting blog post: ', error);
-//     throw error;
-//   }
-// }
+// Event listener for the submit button
+submitBtn.addEventListener("click", function () {
+    const blogTitle = titleField.value;
+    const blogAuthor = authorName.value;
+    const blogContent = simplemde.value();
+    const imageUrl = "https://mustard-nu.vercel.app/assets/images/events/image_08.jpg";
 
-// // Function to query all blog posts
-// async function getAllBlogPosts() {
-//   try {
-//     const snapshot = await db.collection('blogs').get();
-//     const blogPosts = [];
-//     snapshot.forEach(doc => {
-//       blogPosts.push({ id: doc.id, ...doc.data() });
-//     });
-//     return blogPosts;
-//   } catch (error) {
-//     console.error('Error getting blog posts: ', error);
-//     throw error;
-//   }
-// }
-
-// // function to get blog details by blogId
-// async function getBlogById(blogId) {
-//     try {
-//         const docRef = await db.collection('blogs').doc(blogId).get();
-//         if (docRef.exists) {
-//             return { id: docRef.id, ...docRef.data() };
-//         } else {
-//             return null;
-//         }
-//     } catch (error) {
-//         console.error('Error getting blog post: ', error);
-//         throw error;
-//     }
-// }
-
-// // export { createBlogPost, updateBlogPost, deleteBlogPost, getAllBlogPosts, getBlogById };
+    if (blogTitle && blogAuthor && blogContent.length > 90) {
+        db.collection("blogPosts").add({
+            title: blogTitle,
+            author: blogAuthor,
+            content: blogContent,
+            date: firebase.firestore.Timestamp.fromDate(new Date()),
+            image: imageUrl
+        }).then(function () {
+            alert("Blog post created successfully!");
+        }).catch(function () {
+            alert("Failed to create blog post.");
+        });
+    } else {
+        alert("Please fill in all fields and ensure the blog content is more than 90 characters.");
+    }
+});

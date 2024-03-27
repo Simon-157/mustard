@@ -9,7 +9,8 @@
     <!-- Include Firebase scripts and other stylesheets -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet" />
@@ -162,6 +163,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="blog-creation-form">
+                        <!-- Add image upload input field -->
+                        <label for="blogImage">Blog Image:</label>
+                        <input type="file" id="blogImage" accept="image/*" />
+                        <br />
                         <label for="blogTitle">Blog Title/ topic: </label>
                         <input type="text" id="blogTitle" placeholder="Enter your blog title" />
                         <br />
@@ -171,7 +176,6 @@
                         <div class="form-group">
                             <label for="blogContent">Blog Content:</label>
                             <textarea id="blogContent"></textarea>
-
                         </div>
 
                         <button id="submitBlogBtn" class="btn btn-primary mb-4">Save Blog Post</button>
@@ -240,10 +244,12 @@
     <script src="assets/js/db.js"></script>
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
+
     <script>
         const authorName = document.getElementById("blogAuthor");
         const titleField = document.getElementById("blogTitle");
         const contentField = document.getElementById("blogContent");
+        const imageInput = document.getElementById("blogImage"); // Add this line
         const submitBtn = document.getElementById("submitBlogBtn");
 
         // Initialize SimpleMDE
@@ -266,22 +272,39 @@
             const blogTitle = titleField.value;
             const blogAuthor = authorName.value;
             const blogContent = simplemde.value();
-            const imageUrl = "https://mustard-nu.vercel.app/assets/images/events/image_08.jpg";
+            const imageFile = imageInput.files[0]; // Get selected image file
 
-            if (blogTitle && blogAuthor && blogContent.length > 90) {
-                db.collection("blogPosts").add({
-                    title: blogTitle,
-                    author: blogAuthor,
-                    content: blogContent,
-                    date: firebase.firestore.Timestamp.fromDate(new Date()),
-                    image: imageUrl
-                }).then(function () {
-                    alert("Blog post created successfully!");
-                }).catch(function () {
-                    alert("Failed to create blog post.");
-                });
+            if (blogTitle && blogAuthor && blogContent.length > 90 && imageFile) {
+                // Upload image to Firebase Storage
+                const storageRef = firebase.storage().ref('blogimages/' + imageFile.name);
+                const uploadTask = storageRef.put(imageFile);
+
+                uploadTask.on('state_changed',
+                    null,
+                    function (error) {
+                        console.error('Error uploading image: ', error);
+                        alert("Failed to upload image.");
+                    },
+                    function () {
+                        // Image uploaded successfully, get URL
+                        uploadTask.snapshot.ref.getDownloadURL().then(function (imageUrl) {
+                            // Save blog post with image URL to Firestore
+                            db.collection("blogPosts").add({
+                                title: blogTitle,
+                                author: blogAuthor,
+                                content: blogContent,
+                                date: firebase.firestore.Timestamp.fromDate(new Date()),
+                                image: imageUrl
+                            }).then(function () {
+                                alert("Blog post created successfully!");
+                            }).catch(function () {
+                                alert("Failed to create blog post.");
+                            });
+                        });
+                    }
+                );
             } else {
-                alert("Please fill in all fields and ensure the blog content is more than 90 characters.");
+                alert("Please fill in all fields, ensure the blog content is more than 90 characters, and select an image.");
             }
         });
     </script>
