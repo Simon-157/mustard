@@ -10,9 +10,13 @@ $(document).ready(function () {
         db.collection("services").get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var serviceHTML = `
-                <div class="col-md-4 col-sm-6" id="${doc.id}">
+                <div class="col-md-4 col-sm-6 single-beneficiary" id="${doc.id}">
                     <div class="event-box">
+                    <figure>
+
                         <img src="${doc.data().imageUrl}" alt="">
+
+                    </figure>
                         <h4>${doc.data().name}</h4>
                         <p class="raises"><span>Raised : $${doc.data()?.raised}</span> / $${doc.data().target ? doc.data().target : 10000}</p>
                         <p class="desic">${doc.data().description}</p>
