@@ -21,6 +21,42 @@
   <link rel="stylesheet" href="assets/plugins/slider/css/owl.theme.default.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
   <style>
+        /* Custom CSS for blog posts */
+       .blog-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -15px;
+        }
+        .single-blog {
+            flex: 1 0 33.33%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+        }
+        .single-blog figure {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+        .single-blog img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .blog-detail {
+            padding: 15px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+            border: 1px solid #eee;
+            background-color: #fff;
+        }
+        .blog-detail h4 {
+            margin-top: 0;
+        }
+
     .create-icon {
       color: #5cb85c !important;
       font-size: 15px;
@@ -101,7 +137,7 @@
           </div>
           <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed">
             <button class="btn btn-sm btn-success join">Join Us</button>
-            <button class="btn btn-sm btn-default donate">Donate</button>
+            <button class="btn btn-sm btn-success donate">Donate</button>
           </div>
         </div>
       </div>
@@ -141,9 +177,9 @@
                 <a class="nav-link" href="contact_us.html">Contact us</a>
               </li>
               <li class="nav-item">
-                <button class="btn btn-primary my-2 my-sm-0 logout">
+                <a class=" my-2 my-sm-0 logout nav-link" style="cursor: pointer">
                   <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -176,7 +212,7 @@
 
   <section class="our-blog">
     <div class="container">
-      <div class="blog-row row" id="blogRow">
+      <div class="blog-row row " id="blogRow">
         <!-- Blog posts will be dynamically added here -->
       </div>
     </div>
@@ -356,6 +392,7 @@
                 "/" +
                 date.getFullYear();
               const shortContent = post.content.substring(40, 50) + "...";
+              const renderedtitle = post?.title.substring(0, 50) + "...";
               const renderedContent = marked.parse(shortContent); // Render Markdown content
               let blogHtml;
 
@@ -368,8 +405,8 @@
                                 </figure>
                                 <div class="blog-detail">
                                     <small>By ${post.author} | ${formattedDate}</small>
-                                    <h4 class="blog-title">${post?.title}</h4>
-                                    <div class="content">${renderedContent}</div>
+                                    <h4 class="blog-title">${renderedtitle}</h4>
+                                  <!--  <div class="content">${renderedContent}</div> -->
                                     <div class="post-content" style="display:none">${post.content}</div>
                                     <div class="blog-footer">
                                         
@@ -433,6 +470,8 @@
         .then(() => {
           console.log("Document successfully deleted!");
           // Reload page or update blog list
+          $("#deleteModal").modal("hide");
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Error removing document: ", error);

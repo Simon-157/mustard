@@ -48,6 +48,10 @@
 </head>
 
 <body>
+        <!-- Loader -->
+    <div class="loader-overlay" id="loader-overlay">
+        <div class="loader"></div>
+    </div>
     <!-- Header Section -->
 
     <header class="continer-fluid">
@@ -185,6 +189,57 @@
         </div>
     </section>
 
+      <!-- Success Modal -->
+  <div class="modal fade" id="CreateSuccessModal" tabindex="-1" role="dialog" aria-labelledby="CreateSuccessModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="CreateSuccessModalLabel">Thank You!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Your blog post has been created successfully.
+            And you should now see it at the blogs page.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary closesuccess" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+       <!-- Failure Modal -->
+  <div class="modal fade" id="CreateFailModal" tabindex="-1" role="dialog" aria-labelledby="CreateFailModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="CreateFailModalLabel">Thank You!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Something went wrong while creating your blog post.
+            Please try again  or contact support.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary " data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <!-- ################# Footer Starts Here#######################--->
 
@@ -273,7 +328,7 @@
             const blogAuthor = authorName.value;
             const blogContent = simplemde.value();
             const imageFile = imageInput.files[0]; // Get selected image file
-
+            $(".loader-overlay").show().css("display", "flex");
             if (blogTitle && blogAuthor && blogContent.length > 90 && imageFile) {
                 // Upload image to Firebase Storage
                 const storageRef = firebase.storage().ref('blogimages/' + imageFile.name);
@@ -295,15 +350,25 @@
                                 content: blogContent,
                                 date: firebase.firestore.Timestamp.fromDate(new Date()),
                                 image: imageUrl
-                            }).then(function () {
-                                alert("Blog post created successfully!");
+                            }).then(function (docRef) { // Define docRef variable here
+                                $(".loader-overlay").hide();
+                                $("#CreateSuccessModal").modal("show");
+                                // alert("Blog post created successfully!");
+                                $('.closesuccess').click(function () {
+                                    window.location.href = "full_blog.html?blogId=" + docRef.id;
+                                });
+
                             }).catch(function () {
-                                alert("Failed to create blog post.");
+
+                                $(".loader-overlay").hide();
+                                $("#CreateFailModal").modal("show");
+                                // alert("Failed to create blog post.");
                             });
                         });
                     }
                 );
             } else {
+                $(".loader-overlay").hide();
                 alert("Please fill in all fields, ensure the blog content is more than 90 characters, and select an image.");
             }
         });

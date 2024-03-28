@@ -26,7 +26,35 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
       <script src="https://www.google.com/recaptcha/api.js?render=6LcDmaQpAAAAAARg5048GRMCVKNHW_g-pEHVNC86" type="text/javascript"></script>
 
+    <style>
 
+        /* Custom CSS for beneficiaries */
+       .beneficiary-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -15px;
+        }
+        .single-beneficiary {
+            flex: 1 0 33.33%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+        }
+        .single-beneficiary figure {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+        .single-beneficiary img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 
 </head>
 
@@ -72,7 +100,7 @@
                     </div>
                     <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed">
                         <button class="btn btn-sm btn-success join">Join Us</button>
-                        <button class="btn btn-sm btn-default donate">Donate</button>
+                        <button class="btn btn-sm btn-success donate">Donate</button>
                     </div>
                 </div>
             </div>
@@ -112,9 +140,9 @@
                                 <a class="nav-link" href="about_us.html">About us</a>
                             </li>
                             <li class="nav-item">
-                                <button class="btn btn-primary my-2 my-sm-0 logout">
+                                <a class="nav-link my-2 my-sm-0 logout">
                                     <i class="fas fa-sign-out-alt"></i> Logout
-                                </button>
+                                </a>
                             </li>
 
 
@@ -345,7 +373,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla vel nisl a dictum. Donec ut
                 est arcu. Donec hendrerit velit</p>
         </div>
-        <div class="row team-row" id="beneficiaries-container">
+        <div class="row team-row beneficiary-row" id="beneficiaries-container">
             <!-- Beneficiaries will be dynamically inserted here -->
         </div>
     </div>
@@ -574,7 +602,6 @@
     document.getElementById('shareButton').addEventListener('click', function () {
         // Check if the Web Share API is supported by the browser
         if (navigator.share) {
-            // Customize URL and text to share
             var urlToShare = window.location.href;
             var shareData = {
                 title: 'Check out this awesome page!',
@@ -586,7 +613,7 @@
                 .then(() => console.log('Successful share'))
                 .catch((error) => console.log('Error sharing:', error));
         } else {
-            // Web Share API not supported, provide fallback (AddToAny)
+            // Web Share API not supported, fallback (AddToAny)
             console.log('Web Share API not supported');
             document.querySelector('.a2a_kit').style.display = 'block';
         }

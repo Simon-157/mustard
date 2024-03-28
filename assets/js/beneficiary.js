@@ -12,13 +12,16 @@ $(document).ready(function () {
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
                 const beneficiaryHtml = `
-                <div class="col-md-3 col-sm-6" id="${doc.id}">
+                <div class="col-md-3 col-sm-6 single-beneficiary" id="${doc.id}">
                     <div class="single-usr benCont">
+                    <figure>
+
                         <img src="${data.imageUrl}" alt="">
+                    </figure>
                         <div class="det-o">
                             <h4 class="beneficiary-name">${data.firstname} ${data.lastname}</h4>
                             <i class="beneficiary-email">${data.email}</i>
-                            <button type="button" class="btn btn-success btn-sm help-beneficiary-btn" 
+                            <button type="button" class="btn btn-primary rounded rounded-md btn-sm help-beneficiary-btn" 
                                 data-toggle="modal" data-target="#helpModal"
                                 onClick="window.handleHelpClick('${data.firstname} ${data.lastname}', '${data.email}')">
                                 Click to help
@@ -171,7 +174,7 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 // Handle error response
                 console.error("Error:", error);
-                alert("Error submitting form: " + xhr.responseText); // Displaying error message from API response
+                alert("Error submitting form: " + xhr.responseText); 
                 $("#loader-overlay").hide(); // Hide loader
             },
         });
