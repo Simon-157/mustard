@@ -304,7 +304,7 @@
         const authorName = document.getElementById("blogAuthor");
         const titleField = document.getElementById("blogTitle");
         const contentField = document.getElementById("blogContent");
-        const imageInput = document.getElementById("blogImage"); // Add this line
+        const imageInput = document.getElementById("blogImage"); 
         const submitBtn = document.getElementById("submitBlogBtn");
 
         // Initialize SimpleMDE
@@ -350,7 +350,7 @@
                                 content: blogContent,
                                 date: firebase.firestore.Timestamp.fromDate(new Date()),
                                 image: imageUrl
-                            }).then(function (docRef) { // Define docRef variable here
+                            }).then(function (docRef) { 
                                 $(".loader-overlay").hide();
                                 $("#CreateSuccessModal").modal("show");
                                 // alert("Blog post created successfully!");
